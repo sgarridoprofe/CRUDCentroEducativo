@@ -86,7 +86,7 @@ public class CursoAcademicoDaoImp implements CursoAcademicoDao {
     @Override
     public List<CursoAcademico> getAll() throws SQLException {
         CursoAcademico cursoaca=null;
-        String sql="select * from cursoacademico";
+        String sql="select * from cursoacademico order by yearinicio desc";
         
         List<CursoAcademico> result=new ArrayList();
 

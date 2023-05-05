@@ -4,8 +4,20 @@
  */
 package com.iesiliberis.crudcentroeducativo.formularios;
 
+import com.iesiliberis.crudcentroeducativo.controladorDAO.CursoAcademicoDaoImp;
+import com.iesiliberis.crudcentroeducativo.entidades.CursoAcademico;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
 
 /**
  *
@@ -13,12 +25,78 @@ import javax.swing.JInternalFrame;
  */
 public class frmMain extends javax.swing.JFrame {
 
+    public int idCursoAcademico=0; 
+    private JLabel statusLabel;
     /**
      * Creates new form frmMain
      */
     public frmMain() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        
+        JPanel status = new JPanel();
+        statusLabel = new JLabel("");
+        status.add( statusLabel );
+        this.getContentPane().add(status, BorderLayout.SOUTH);
+        
+        generaMenuCursosAcademicos();
+        
+    }
+    
+    private void generaMenuCursosAcademicos(){
+        
+        /*JRadioButtonMenuItem jrb23=new JRadioButtonMenuItem("2022-2023", true);
+        JRadioButtonMenuItem jrb22=new JRadioButtonMenuItem("2021-2022", false);
+        JRadioButtonMenuItem jrb21=new JRadioButtonMenuItem("2020-2021", false);
+        
+        ButtonGroup bgrCursosAcademicos=new ButtonGroup();
+        
+        jmnCursoAcademico.add(jrb23);
+        bgrCursosAcademicos.add(jrb23);
+        jmnCursoAcademico.add(jrb22);
+        bgrCursosAcademicos.add(jrb22);
+        jmnCursoAcademico.add(jrb21);
+        bgrCursosAcademicos.add(jrb21);
+        */
+                
+        ButtonGroup bgrCursosAcademicos=new ButtonGroup();
+        JRadioButtonMenuItem jrbCursoAcademico;
+        
+        CursoAcademicoDaoImp cursoaca=CursoAcademicoDaoImp.getInstance();
+        
+        try{
+            List<CursoAcademico> lst=cursoaca.getAll();
+            
+                for( CursoAcademico curso :lst){
+                    jrbCursoAcademico=new JRadioButtonMenuItem(""+curso.getDescripcion(), true);                    
+                    jrbCursoAcademico.setName(""+curso.getId());
+                    if (idCursoAcademico==0){
+                        idCursoAcademico=curso.getId();
+                        statusLabel.setText(""+curso.getDescripcion());
+                    }
+                    bgrCursosAcademicos.add(jrbCursoAcademico);
+                    jmnCursoAcademico.add(jrbCursoAcademico); 
+                    
+                    jrbCursoAcademico.addItemListener(new ItemListener(){
+                        
+                        public void itemStateChanged(ItemEvent e){
+                            
+                            JRadioButtonMenuItem jrbSelected=(JRadioButtonMenuItem)e.getItem();
+                            idCursoAcademico=Integer.parseInt(jrbSelected.getName());
+                            System.out.println(""+idCursoAcademico);
+                            statusLabel.setText(jrbSelected.getText());
+                            
+                        }
+                        
+                    });
+                    
+                    
+                }
+        }catch(Exception e){
+            System.out.println("Error..."+e.getMessage());
+        }
+    
     }
 
     private boolean existeFormulario(Object object){
@@ -70,11 +148,25 @@ public class frmMain extends javax.swing.JFrame {
         optmCursoAcademico = new javax.swing.JMenuItem();
         copyMenuItem = new javax.swing.JMenuItem();
         optmAlumno = new javax.swing.JMenuItem();
+        jmnCursoAcademico = new javax.swing.JMenu();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         optmAcerca = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout pnldEscritorioLayout = new javax.swing.GroupLayout(pnldEscritorio);
+        pnldEscritorio.setLayout(pnldEscritorioLayout);
+        pnldEscritorioLayout.setHorizontalGroup(
+            pnldEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        pnldEscritorioLayout.setVerticalGroup(
+            pnldEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 342, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(pnldEscritorio, java.awt.BorderLayout.CENTER);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Parametrización");
@@ -131,6 +223,9 @@ public class frmMain extends javax.swing.JFrame {
 
         menuBar.add(editMenu);
 
+        jmnCursoAcademico.setText("Año Academico");
+        menuBar.add(jmnCursoAcademico);
+
         helpMenu.setMnemonic('h');
         helpMenu.setText("Ayuda");
 
@@ -151,17 +246,6 @@ public class frmMain extends javax.swing.JFrame {
         menuBar.add(helpMenu);
 
         setJMenuBar(menuBar);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnldEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnldEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -241,6 +325,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenu jmnCursoAcademico;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem optmAcerca;
