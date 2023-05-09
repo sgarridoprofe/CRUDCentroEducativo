@@ -6,9 +6,12 @@ package com.iesiliberis.crudcentroeducativo.formularios;
 
 import com.iesiliberis.crudcentroeducativo.controladorDAO.AlumnoDaoImp;
 import com.iesiliberis.crudcentroeducativo.entidades.Alumno;
+import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
+
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -234,8 +237,13 @@ public class frmInternoAlumnos extends javax.swing.JInternalFrame {
         if (evt.getClickCount()==2){
             // System.out.println("Doble click.....");
             //Cargar el detalle de un alumno
-            /*JDialog frame=new JDialog(this,"Detalle Alumno",true);
-
+            
+            
+            //JDialog frame=new JDialog(this,"Detalle Alumno",true);
+            JDialog frame=new JDialog();
+            frame.setTitle("Detalle Alumno");
+            frame.setModal(true);
+            
             jpAlumnoDetalle panel=new jpAlumnoDetalle();
 
             int idseleccion=Integer.parseInt(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 0).toString());
@@ -245,7 +253,7 @@ public class frmInternoAlumnos extends javax.swing.JInternalFrame {
             frame.getContentPane().add(panel);
             frame.pack();
             frame.setVisible(true);
-*/
+
         }
     }//GEN-LAST:event_jtAlumnosMouseClicked
 

@@ -160,6 +160,11 @@ public class frmAlumnos extends javax.swing.JFrame {
                 jtAlumnosMouseClicked(evt);
             }
         });
+        jtAlumnos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtAlumnosKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtAlumnos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -228,6 +233,7 @@ public class frmAlumnos extends javax.swing.JFrame {
 
     private void jtAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtAlumnosMouseClicked
         // TODO add your handling code here:
+        System.out.println("pulsado....");
       if (evt.getClickCount()==2){
          // System.out.println("Doble click.....");
          //Cargar el detalle de un alumno
@@ -245,6 +251,10 @@ public class frmAlumnos extends javax.swing.JFrame {
          
       }
     }//GEN-LAST:event_jtAlumnosMouseClicked
+
+    private void jtAlumnosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAlumnosKeyPressed
+              // TODO add your handling code here:
+    }//GEN-LAST:event_jtAlumnosKeyPressed
 
     /**
      * @param args the command line arguments

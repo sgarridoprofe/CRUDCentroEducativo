@@ -41,7 +41,7 @@ public class frmMain extends javax.swing.JFrame {
         this.getContentPane().add(status, BorderLayout.SOUTH);
         
         generaMenuCursosAcademicos();
-        
+        //System.out.println("Generado menu");
     }
     
     private void generaMenuCursosAcademicos(){
@@ -148,6 +148,7 @@ public class frmMain extends javax.swing.JFrame {
         optmCursoAcademico = new javax.swing.JMenuItem();
         copyMenuItem = new javax.swing.JMenuItem();
         optmAlumno = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jmnCursoAcademico = new javax.swing.JMenu();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
@@ -197,6 +198,11 @@ public class frmMain extends javax.swing.JFrame {
 
         editMenu.setMnemonic('e');
         editMenu.setText("Mantenimimientos");
+        editMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editMenuMouseClicked(evt);
+            }
+        });
 
         optmCursoAcademico.setMnemonic('t');
         optmCursoAcademico.setText("Curso Academico");
@@ -220,6 +226,14 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         editMenu.add(optmAlumno);
+
+        jMenuItem1.setText("Unidades");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        editMenu.add(jMenuItem1);
 
         menuBar.add(editMenu);
 
@@ -283,6 +297,19 @@ public class frmMain extends javax.swing.JFrame {
               
     }//GEN-LAST:event_optmAlumnoActionPerformed
 
+    private void editMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMenuMouseClicked
+        // TODO add your handling code here:
+     
+    }//GEN-LAST:event_editMenuMouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        frmUnidades2 frm=new frmUnidades2();
+         
+         pnldEscritorio.add(frm);
+         frm.show();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -325,6 +352,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jmnCursoAcademico;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
